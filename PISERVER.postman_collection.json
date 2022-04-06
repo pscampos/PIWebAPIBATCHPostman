@@ -1,0 +1,1431 @@
+{
+	"info": {
+		"_postman_id": "55520710-5490-4ab8-9984-a6dea84a4edf",
+		"name": "PISERVER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WEBAPI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://PISERVER/piwebapi",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search AF Server Filter: Name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFServer\", encodeURIComponent(\"PISERVER\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetservers\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetservers?name={{AFServer}}\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Table Filter: Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"TablePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Tables[Pump Info]\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-table\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/tables?path={{TablePath}}\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Data Table Filter: Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"TablePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Tables[Pump Info]\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-table\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/tables?path={{TablePath}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-data\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/tables/{0}/data\",\r\n    \"ParentIds\": [\"01-table\"], \r\n    \"Parameters\": [\"$.01-table.Content.WebId\"]\r\n    }\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Database Filter: Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Element Filter: Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Element Filter: Template",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementTemplate\", encodeURIComponent(\"Pump\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/elements?templateName={{ElementTemplate}}&searchFullHierarchy=true\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Element Filter: Element Name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementName\", encodeURIComponent(\"Process 01\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/elements?nameFilter={{ElementName}}&searchFullHierarchy=true\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Element Full Hierarchy Filter: AFDatabase",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/elements?searchFullHierarchy=true\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Element Full Hierarchy Filter: Element Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-elementshierarchy\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elements?searchFullHierarchy=true\",\r\n    \"ParentIds\": [\"02-elements\"], \r\n    \"Parameters\": [\"$.02-elements.Content.WebId\"]\r\n    }\r\n} "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Filter: Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"AttributePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01|Pressure\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-attribute\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/attributes?path={{AttributePath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n} "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Filter: Element Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"AttributePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01|Pressure\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },    \r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-attributes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elementattributes\",\r\n    \"ParentIds\": [\"02-elements\"], \r\n    \"Parameters\": [\"02-elements.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Filter: Element Path, Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"AttributeCategory\", encodeURIComponent(\"Process Data\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },    \r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-attributes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elementattributes?attributeCategory={{AttributeCategory}}\",\r\n    \"ParentIds\": [\"02-elements\"], \r\n    \"Parameters\": [\"02-elements.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Value Filter: Last Value, Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"AttributePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01|Pressure\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-attibute\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/attributes?path={{AttributePath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-value\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/streams/{0}/value\",\r\n    \"ParentIds\": [\"02-attibute\"], \r\n    \"Parameters\": [\"$.02-attibute.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Value Filter: Time, Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"AttributePath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01|Pressure\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-10d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-attibute\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/attributes?path={{AttributePath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-value\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/streams/{0}/recorded?startTime={{StartTime}}&endTime={{EndTime}}\",\r\n    \"ParentIds\": [\"02-attibute\"], \r\n    \"Parameters\": [\"$.02-attibute.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Attribute Value Filter: Time, Element Path, Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"AttributeCategory\", encodeURIComponent(\"Process Data\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-10d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },    \r\n  \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-attributes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elementattributes?attributeCategory={{AttributeCategory}}\",\r\n    \"ParentIds\": [\"02-elements\"], \r\n    \"Parameters\": [\"02-elements.Content.WebId\"]\r\n    },\r\n  \"04-value\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"RequestTemplate\": {\r\n        \"Resource\": \"https://{{PIVisionServer}}/piwebapi/streams/{0}/recorded?startTime={{StartTime}}&endTime={{EndTime}}\"\r\n    },\r\n    \"ParentIds\": [\"03-attributes\"], \r\n    \"Parameters\": [\"$.03-attributes.Content.Items[*].WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"*\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes?nameFilter={{EventFrameName}}&startTime={{StartTime}}&endTime={{EndTime}}&searchMode=StartInclusive\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Name, InProgress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"*\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes?nameFilter={{EventFrameName}}&startTime={{StartTime}}&endTime={{EndTime}}&searchMode=InProgress\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Name, EFTemplate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"NewEventFrame\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplate\", encodeURIComponent(\"Pump High Pressure\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*-1d\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes?nameFilter={{EventFrameName}}&startTime={{StartTime}}&endTime={{EndTime}}&templateName={{EventFrameTemplate}}&searchMode=StartInclusive\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Name, EFTemplate, InProgress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"*\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplate\", encodeURIComponent(\"Pump High Pressure\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-10d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\"); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes?nameFilter={{EventFrameName}}&startTime={{StartTime}}&endTime={{EndTime}}&templateName={{EventFrameTemplate}}&searchMode=InProgress\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Element path, EFTemplate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplate\", encodeURIComponent(\"Pump High Pressure\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}&templateName={{EventFrameTemplate}}\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    }\r\n}  "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Element path, EFTemplate, inProgress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplate\", encodeURIComponent(\"Pump High Pressure\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}&templateName={{EventFrameTemplate}}&searchMode=InProgress\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    }\r\n}   "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Element path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}&selectedFields=Name;WebID;Path\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    }\r\n}   "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Element path, InProgress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}&selectedFields=Name;WebID;Path\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}&searchMode=InProgress\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    }\r\n}   "
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Parent Element path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-childelements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elements\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    },\r\n  \"04-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"RequestTemplate\": {\r\n    \t\"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}\"\r\n    },\r\n    \"ParentIds\": [\"03-childelements\"], \r\n    \"Parameters\": [\"$.03-childelements.Content.Items[*].WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Event Frames Filter: Time, Grand Parent Element Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-10d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-childelements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elements\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    },\r\n  \"04-grandchildelements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"RequestTemplate\": {\r\n    \t\"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/elements\"\r\n    },\r\n    \"ParentIds\": [\"03-childelements\"], \r\n    \"Parameters\": [\"$.03-childelements.Content.Items[*].WebId\"]\r\n    },\r\n  \"05-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"RequestTemplate\": {\r\n    \t\"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}\"\r\n    },\r\n    \"ParentIds\": [\"04-grandchildelements\"], \r\n    \"Parameters\": [\"$.04-grandchildelements.Content.Items[*].Content.Items[*].WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Frame with no Element",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"NewEventFrame\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplateName\", \"Pump High Pressure\");\r",
+							"postman.setEnvironmentVariable(\"EventFrameStartTime\", \"2022-02-25T20:00:00Z\");\r",
+							"postman.setEnvironmentVariable(\"EventFrameEndTime\", \"2022-02-25T21:00:00Z\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n    \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n    \"03-createeventframe\": \r\n    {\r\n    \"Method\": \"POST\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes\",\r\n    \"Content\": \"{\\\"Name\\\":\\\"{{EventFrameName}}\\\", \\\"TemplateName\\\": \\\"{{EventFrameTemplateName}}\\\", \\\"StartTime\\\": \\\"{{EventFrameStartTime}}\\\", \\\"EndTime\\\": \\\"{{EventFrameEndTime}}\\\"}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Frame on Element Filter: Element Path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameName\", encodeURIComponent(\"NewEventFrame\"));\r",
+							"postman.setEnvironmentVariable(\"EventFrameTemplateName\", \"Pump High Pressure\");\r",
+							"postman.setEnvironmentVariable(\"EventFrameStartTime\", \"2022-02-25T20:00:00Z\");\r",
+							"postman.setEnvironmentVariable(\"EventFrameEndTime\", \"2022-02-25T21:00:00Z\");\r",
+							"postman.setEnvironmentVariable(\"ElementWebID\",'P1Em'+btoa(decodeURIComponent(pm.environment.get(\"ElementPath\")).toUpperCase().substring(2)).replace(/=/g,\"\")); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n    \"02-elements\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n    \"03-createeventframe\": \r\n    {\r\n    \"Method\": \"POST\",\r\n        \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases/{0}/eventframes\",\r\n        \"Content\": \"{\\\"Name\\\":\\\"{{EventFrameName}}\\\", \\\"TemplateName\\\": \\\"{{EventFrameTemplateName}}\\\", \\\"StartTime\\\": \\\"{{EventFrameStartTime}}\\\", \\\"EndTime\\\": \\\"{{EventFrameEndTime}}\\\", \\\"RefElementWebIds\\\":[\\\"{{ElementWebID}}\\\"]}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event Frames Close Filter: Start Time, InProgress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EventFrameEndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/eventframes/search?databaseWebId={0}&query=Start:>={{StartTime}} AND InProgress:=True\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"04-update\": \r\n    {\r\n    \"Method\": \"PATCH\",\r\n    \"RequestTemplate\": {\r\n        \"Resource\": \"https://{{PIVisionServer}}/piwebapi/eventframes/{0}\"\r\n    },\r\n    \"Content\": \"{\\\"EndTime\\\": \\\"{{EventFrameEndTime}}\\\"}\",\r\n    \"ParentIds\": [\"02-eventframes\"], \r\n    \"Parameters\": [\"$.02-eventframes.Content.Items[*].WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Event Frames Filter: Time, Element path",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"PIVisionServer\", encodeURIComponent(\"PISERVER\"));\r",
+							"postman.setEnvironmentVariable(\"AFDatabase\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\"));\r",
+							"postman.setEnvironmentVariable(\"ElementPath\", encodeURIComponent(\"\\\\\\\\PISERVER\\\\Main\\\\Company\\\\Area\\\\Process 02\\\\Pump01\"));\r",
+							"postman.setEnvironmentVariable(\"StartTime\", \"*-100d\");\r",
+							"postman.setEnvironmentVariable(\"EndTime\", \"*\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; cherset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"01-assetdatabases\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/assetdatabases?path={{AFDatabase}}&selectedFields=Name;WebID\"\r\n    },\r\n  \"02-element\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements?path={{ElementPath}}\",\r\n    \"ParentIds\": [\"01-assetdatabases\"], \r\n    \"Parameters\": [\"$.01-assetdatabases.Content.WebId\"]\r\n    },\r\n  \"03-eventframes\": \r\n    {\r\n    \"Method\": \"GET\",\r\n    \"Resource\": \"https://{{PIVisionServer}}/piwebapi/elements/{0}/eventframes?startTime={{StartTime}}&endTime={{EndTime}}\",\r\n    \"ParentIds\": [\"02-element\"], \r\n    \"Parameters\": [\"$.02-element.Content.WebId\"]\r\n    },\r\n  \"04-deleteEventFrames\":\r\n    {\r\n    \"Method\": \"DELETE\",\r\n    \"RequestTemplate\": {\r\n        \"Resource\": \"https://{{PIVisionServer}}/piwebapi/eventframes/{0}\"\r\n    },\r\n    \"ParentIds\": [\"03-eventframes\"], \r\n    \"Parameters\": [\"$.03-eventframes.Content.Items[*].WebId\"]\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://PISERVER/piwebapi/batch/",
+					"protocol": "https",
+					"host": [
+						"PISERVER"
+					],
+					"path": [
+						"piwebapi",
+						"batch",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "PIServer123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "PISERVER\\Administrator",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
